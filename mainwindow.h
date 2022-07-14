@@ -11,9 +11,21 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+
+public slots:
+ // void recebePosicao(int x, int y);
+  void finalizaprograma();
+  void salvaArquivo();
+  //void newDraw();
+
+
+private slots:
+  void on_actionsalvaarquivo_triggered();
 
 private:
     Ui::MainWindow *ui;
