@@ -3,7 +3,7 @@
 struct Voxel {
   float r,g,b; // Cores
   float a;// Transparencia
-  bool isOn; // Inclui ou n�o
+  bool isOn; // Inclui ou nao
 };
 
 class Sculptor

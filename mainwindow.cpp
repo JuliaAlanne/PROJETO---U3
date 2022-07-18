@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QFileDialog>
 #include <QLCDNumber>
-//#include "dialog.h"
+#include "dialog.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -23,15 +23,52 @@ MainWindow::MainWindow(QWidget *parent)
             SIGNAL(valueChanged(int)),
             ui->labelZ,
             SLOT(setNum(int)));
+
     connect(ui->actionQuit,
             SIGNAL(triggered()),
             this,
             SLOT(finalizaprograma()));
+    connect(ui->horizontalSliderX,
+            SIGNAL(valueChanged(int)),
+            ui->lcdNumber_BoxX,
+            SLOT(mudaXCaixa(int)));
+
+    connect(ui->horizontalSliderY,
+            SIGNAL(valueChanged(int)),
+            ui->lcdNumber_BoxY,
+            SLOT(mudaYCaixa(int)));
+
+    connect(ui->horizontalSliderZ,
+            SIGNAL(valueChanged(int)),
+            ui->lcdNumber_BoxZ,
+            SLOT(mudaZCaixa(int)));
 
     connect(ui->actionSave,
             SIGNAL(triggered()),
             this,
             SLOT(salvaArquivo()));
+
+    connect(ui->horizontalSliderEsferaR,
+            SIGNAL(valueChanged(int)),
+            ui->widget,
+            SLOT(alteraRaioEsfera(int)));
+
+    // Alterando os valor dos raio do elipsoide
+    connect(ui->horizontalSliderRXellipsoid,
+            SIGNAL(valueChanged(int)),
+            ui->widget,
+            SLOT(alteraRaioXEllipsoid(int)));
+
+    connect(ui->horizontalSliderRYellipsoid,
+            SIGNAL(valueChanged(int)),
+            ui->widget,
+            SLOT(alteraRaioYEllipsoid(int)));
+
+    connect(ui->horizontalSliderRZellipsoid,
+            SIGNAL(valueChanged(int)),
+            ui->widget,
+            SLOT(alteraRaioZEllipsoid(int)));
+
 
     connect(ui->actionNovoDesenho,
             SIGNAL(triggered()),
