@@ -19,13 +19,23 @@ public:
 
 public slots:
  // void recebePosicao(int x, int y);
-  void finalizaprograma();
+  //void finalizaprograma();
   void salvaArquivo();
-
+  void capturaAcao(bool);
 private slots:
-  void on_actionsalvaarquivo_triggered();
+
+
+
+signals:
+
+  void nomeAcao(QString);
+
 
 private:
+
     Ui::MainWindow *ui;
+    QString ultimaAcao;
+
 };
+
 #endif // MAINWINDOW_H

@@ -1,5 +1,9 @@
 #ifndef SCULPTOR_H
 #define SCULPTOR_H
+#include<iostream>
+#include<cstring>
+
+
 struct Voxel {
   float r,g,b; // Cores
   float a;// Transparencia
@@ -8,11 +12,16 @@ struct Voxel {
 
 class Sculptor
 {
+
 private:
+
   Voxel ***v;  // 3D matrix
   int nx,ny,nz; // Dimensions
   float r,g,b,a; // Current drawing color
+
 public:
+
+
   Sculptor(int _nx, int _ny, int _nz);
   ~Sculptor();
   void setColor(float r, float g, float b, float alpha);
@@ -24,5 +33,8 @@ public:
   void cutSphere(int xcenter, int ycenter, int zcenter, int r);
   void putEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz);
   void cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz);
+  void print_sculptor();
+  void writeOFF(std::string filename);
+
 };
 #endif // SCULPTOR_H

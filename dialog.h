@@ -1,25 +1,26 @@
 #ifndef DIALOG_H
 #define DIALOG_H
+
 #include <QDialog>
 
-namespace Ui{
-class dialog;
+namespace Ui {
+class Dialog;
 }
 
-class dialog: public QDialog
+class Dialog : public QDialog
 {
     Q_OBJECT
 
 public:
-
-   explicit dialog(QWidget *parent = nullptr);
-   ~dialog();
+    explicit Dialog(QWidget *parent = nullptr);
+    ~Dialog();
 
     int getNumLinhas();
     int getNumColunas();
     int getNumPlanos();
+
 private:
-    Ui::dialog *ui;
+    Ui::Dialog *ui;
 };
 
 #endif // DIALOG_H

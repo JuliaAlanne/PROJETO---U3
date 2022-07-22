@@ -1,28 +1,29 @@
 #include "dialog.h"
 #include "ui_dialog.h"
 
-dialog::dialog(QWidget *parent) :
+Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::dialogEsc)
+    ui(new Ui::Dialog)
 {
     ui->setupUi(this);
 }
-dialog::~dialog()
+
+Dialog::~Dialog()
 {
     delete ui;
 }
 
-int dialog:getNumLinhas()
+int Dialog::getNumLinhas()
 {
-    return ui->spinBoxLinhas->value();
+    return ui -> spinBoxLinhas -> value();
 }
 
-int dialog::getNumColunas()
+int Dialog::getNumColunas()
 {
-    return ui->spinBoxColunas->value();
+    return ui -> spinBoxColunas -> value();
 }
 
-int dialog::getNumPlanos()
+int Dialog::getNumPlanos()
 {
-    return ui->spinBoxPlanos->value();
+    return ui -> spinBoxPlanos -> value();
 }

@@ -1,5 +1,5 @@
 #include "plotter.h"
-
+#include <QPaintEvent>
 #include <QPainter>
 #include <QBrush>
 #include <QPen>
@@ -9,9 +9,16 @@
 #include <QColor>
 #include <math.h>
 #include <algorithm>
-
 #include <QMouseEvent>
+#include<QFileDialog>
+#include<cstring>
+#include <QColorDialog>
+
+
 #include "dialog.h"
+
+
+
 plotter::plotter(QWidget *parent) : QWidget(parent)
 {
     // Dimensões do Escultor
@@ -38,7 +45,7 @@ plotter::plotter(QWidget *parent) : QWidget(parent)
 
 void plotter::paintEvent(QPaintEvent *event)
 {
-  float x,y;
+  //float x,y;
 
   QPainter p(this);
   QBrush brush;
@@ -342,7 +349,7 @@ void plotter::mouseMoveEvent(QMouseEvent *event)
 }*/
 void plotter::abrirDialog()
 {
-    dialog e;
+    Dialog e;
     if(e.exec() == QDialog::Accepted){
         // Pegando as dimensões do escultor
         nlinhas = e.getNumLinhas();
@@ -384,7 +391,7 @@ void plotter::abrirDialog()
             emit alteraSlidersZ(0,nplanos-1);
 
             int re[] = {nlinhas-1,nplanos-1,ncolunas-1};
-            emit alteraSliderRaioEsfera(0,*min_element(re,re+3));
+            emit alteraSliderRaioEsfera(0,*std::min_element(re,re+3));
 
             qDebug() << "Num Linhas: " << nlinhas;
             qDebug() << "Num Colunas: " << ncolunas;
@@ -399,6 +406,98 @@ void plotter::abrirDialog()
             box.exec();
         }
     }
+}
+void plotter::acaoSelec(QString _action)
+{
+    action = _action;
+    qDebug() << "Acao Selecionada " << action;
+}
+
+void plotter::mudaXCaixa(int _x)
+{
+    x_caixa = _x;
+}
+
+void plotter::mudaYCaixa(int _y)
+{
+    y_caixa = _y;
+}
+
+void plotter::mudaZCaixa(int _z)
+{
+    z_caixa = _z;
+}
+
+void plotter::alteraRaioEsfera(int _re)
+{
+    rEsfera = _re;
+}
+
+void plotter::alteraRaioXEllipsoid(int _rx)
+{
+    rXEllipsoid = _rx;
+}
+
+void plotter::alteraRaioYEllipsoid(int _ry)
+{
+    rYEllipsoid = _ry;
+}
+
+void plotter::alteraRaioZEllipsoid(int _rz)
+{
+    rZEllipsoid = _rz;
+}
+void plotter::alteraCor()
+{
+    QColor c;
+    QColorDialog dColor;
+    dColor.exec();
+    c = dColor.selectedColor();
+
+    // Atualizando a cor
+    cor.setRed(c.red());
+    cor.setGreen(c.green());
+    cor.setBlue(c.blue());
+    cor.setAlpha(255);
+
+    //Atualizando os Sliders das Cores
+    emit alteraSliderR(c.red());
+    emit alteraSliderG(c.green());
+    emit alteraSliderB(c.blue());
+
+
+
+
+}
+void plotter::alteraR(int _r)
+{
+    cor.setRed(_r);
+}
+
+void plotter::alteraB(int _b)
+{
+    cor.setBlue(_b);
+}
+
+void plotter::alteraG(int _g)
+{
+    cor.setGreen(_g);
+}
+
+void plotter::salvar()
+{
+  if (nlinhas != 0 && ncolunas !=0 && nplanos !=0){
+   QString fileName = QFileDialog::getSaveFileName(this, tr("Salve o Escultor em formato .off"),"",tr("(*.off);;All Files (*)"));
+   if (fileName.compare("")){
+    sculptor-> writeOFF(fileName.toStdString());
+   }
+  }
+  else {
+      QMessageBox box;
+      box.setText("O Escultor está vazio, não é possível salvar o arquivo .off");
+      box.exec();
+  }
+
 }
 
 void plotter::ativaV(Voxel &v, QColor cor)

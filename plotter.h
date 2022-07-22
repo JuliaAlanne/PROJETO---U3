@@ -44,6 +44,8 @@ public:
   void mousePressEvent(QMouseEvent *event);
   void mouseMoveEvent (QMouseEvent *event);
   //void mouseRelanceEvent(QMouseEvent *event);
+  void salvar();
+  void alteraCor();
 signals:
   void mudaxy(int, int);
   void alteraSlidersX(int,int);
@@ -53,18 +55,24 @@ signals:
   void alteraSlidersZ(int,int);
 
   void alteraSliderRaioEsfera(int,int);
+  void alteraSliderR(int);
+  void alteraSliderG(int);
+  void alteraSliderB(int);
 
 public slots:
   void abrirDialog();
-  void mudaXCaixa();
-  void mudaYCaixa();
-  void mudaZCaixa();
-  void alteraRaioEsfera();
-  void alteraRaioXEllipsoid();
-  void alteraRaioYEllipsoid();
-  void alteraRaioZEllipsoid();
+  void mudaXCaixa(int _x);
+  void mudaYCaixa(int _y);
+  void mudaZCaixa(int _z);
+  void alteraRaioEsfera(int _re);
+  void alteraRaioXEllipsoid(int _rx);
+  void alteraRaioYEllipsoid(int _ry);
+  void alteraRaioZEllipsoid(int _rz);
+  void acaoSelec(QString _action);
 
-
+  void alteraR(int _r);
+  void alteraB(int _b);
+  void alteraG(int _g);
 
 };
 

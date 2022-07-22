@@ -153,9 +153,23 @@ void Sculptor::cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int r
         }
     }
 }
-/*
+void Sculptor::print_sculptor(){
+
+    for(int k=0; k<nz; k++){
+        std::cout << "Plano " << k << std::endl;
+        for(int i=0; i<nx; i++){
+            for (int j=0; j<ny; j++) {
+                    std::cout << v[k][i][j].isOn << " ";
+
+            }
+            std::cout << std::endl;
+        }
+        std::cout << "---------------------------" << std::endl;
+    }
+
+}
 //escreve o arquivo OFF
-void Sculptor::writeOFF( const char* filename){
+void Sculptor::writeOFF( std::string filename){
     std::ofstream file;
     int cont=0, index=0;
     file.open(filename);
@@ -219,6 +233,6 @@ void Sculptor::writeOFF( const char* filename){
         }
     }
     file.close();
-}*/
+}
 
 //destrutor
